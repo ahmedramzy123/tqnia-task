@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "431808372174",
+    "project_id": "notificationchat-d2d49",
+    "storage_bucket": "notificationchat-d2d49.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431808372174:android:309049597f4db3650c1f9f",
+        "android_client_info": {
+          "package_name": "com.example.tqnia_chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCTq5_JRwwILFtspN_mzk9_E8Y1vK5S4Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431808372174:android:15fbe44d0a227ae70c1f9f",
+        "android_client_info": {
+          "package_name": "com.example.uchat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCTq5_JRwwILFtspN_mzk9_E8Y1vK5S4Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
