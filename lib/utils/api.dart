@@ -31,7 +31,7 @@ class DioHelper {
     )..interceptors.addAll([
       InterceptorsWrapper(
         onRequest: (options , handle) async {
-          options.headers['Authorization'] = 'Bearer AAAAZInI3c4:APA91bF_N1Lz1jDy38jPt1GG6Jnj94_zkdheBYXOQ2KAEG9O4QzBPwS4xRtK5k_wU5N3-gYIGceIrpWzxa2gmk0oDXLhTDt9gaZv_mDGJB1JTqnpeKyr8y3rn8ZnbRUdJzk4H66znTWw';
+          // options.headers['Authorization'] = 'Bearer AAAAZInI3c4:APA91bF_N1Lz1jDy38jPt1GG6Jnj94_zkdheBYXOQ2KAEG9O4QzBPwS4xRtK5k_wU5N3-gYIGceIrpWzxa2gmk0oDXLhTDt9gaZv_mDGJB1JTqnpeKyr8y3rn8ZnbRUdJzk4H66znTWw';
           // options.headers['Authorization'] = 'Bearer 579|hKYuHaor7ARdObih2o6dzX4N34fWLb97fqtpxMjW';
           return handle.next(options);
         },
@@ -248,7 +248,7 @@ class DioHelper {
   }) async {
 
     dio.options.headers = {
-      'Authorization': 'Bearer $token',
+      // 'Authorization': 'Bearer $token',
       // 'Authorization': token ,
       'Content-Type': 'application/json',
     };

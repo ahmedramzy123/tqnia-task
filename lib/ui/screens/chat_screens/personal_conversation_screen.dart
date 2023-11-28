@@ -105,7 +105,9 @@ class _PersonalConversationScreenState
           .child(isImage ? _imagesFolderPath : _filesFolderPath);
       await ref.putFile(isImage ? _image! : _file!);
       await ref.getDownloadURL().then((fileURL) {
+        print("11111111111111--->${fileURL}");
         _uploadedFileURL = fileURL;
+
         if (mounted) setState(() {});
       });
     } on FirebaseException catch (e) {
@@ -151,7 +153,6 @@ class _PersonalConversationScreenState
           otherUser);
       _listScrollController.animateTo(0.0,
           duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
-      _uploadedFileURL = null;
       _type = 0;
       setState(() {});
     } on FirebaseException catch (e) {
@@ -190,7 +191,10 @@ class _PersonalConversationScreenState
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: ()
+            {
+              print(_filesFolderPath);
+            },
             icon: SvgPicture.asset(
               'assets/svg/search.svg',
               color: Theme.of(context).shadowColor,
@@ -267,6 +271,7 @@ class _PersonalConversationScreenState
                 IconButton(
                   onPressed: () {
                     print("token----->${widget.token}");
+                    print("FileUrl----->${_uploadedFileURL}");
                     if (isBlank(_message.text)) return;
                     _sendData();
                     DioHelper.postData(url: "/fcm/send", data:

@@ -4,7 +4,6 @@ import 'package:tqnia_chat/providers/auth_provider.dart';
 import 'package:tqnia_chat/providers/chats_provider.dart';
 import 'package:tqnia_chat/ui/screens/auth_screens/login_screen.dart';
 import 'package:tqnia_chat/ui/screens/chat_screens/conversations_screen.dart';
-import 'package:tqnia_chat/ui/screens/notifications_page.dart';
 import 'package:tqnia_chat/ui/screens/splash_screen.dart';
 import 'package:tqnia_chat/utils/api.dart';
 import 'package:tqnia_chat/utils/cache_helper.dart';
@@ -21,6 +20,7 @@ void main() async {
     name: "chat_task",
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   await DioHelper.init();
   await CacheHelper.init();
   NotificationManger().initNotification();

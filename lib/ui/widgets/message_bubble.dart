@@ -1,4 +1,11 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:tqnia_chat/models/message_model.dart';
 import 'package:tqnia_chat/ui/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +14,10 @@ import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_2.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:tqnia_chat/utils/api.dart';
+import 'package:open_file/open_file.dart';
+import 'package:uuid/uuid.dart';
+
 
 class MessageBubble extends StatefulWidget {
   const MessageBubble({Key? key, this.isSender = false, required this.message})
@@ -21,6 +32,7 @@ class MessageBubble extends StatefulWidget {
 class _MessageBubbleState extends State<MessageBubble> {
   @override
   Widget build(BuildContext context) {
+
     // final message = context.watch<MessageProvider>().message;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -88,6 +100,7 @@ class _MessageBubbleState extends State<MessageBubble> {
                               ),
                             ),
                             ChatBubble(
+
                               clipper: ChatBubbleClipper2(
                                 type: widget.isSender
                                     ? BubbleType.sendBubble
@@ -120,12 +133,51 @@ class _MessageBubbleState extends State<MessageBubble> {
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500),
                                   ),
-                                  SvgPicture.asset(
-                                    'assets/svg/download.svg',
-                                    color: widget.isSender
-                                        ? Theme.of(context).primaryColor
-                                        : Theme.of(context)
-                                            .scaffoldBackgroundColor,
+                                  InkWell(
+                                    onTap: ()async
+                                    {
+                                      // Uint8List ? islandRef  =  await FirebaseStorage.instance.refFromURL( widget.message.fileUrl!).getData();
+                                      // final downloadTask = islandRef.(file);
+                                      //
+                                      // DioHelper.downloadData(
+                                      //     token: "AAAAZInI3c4:APA91bF_N1Lz1jDy38jPt1GG6Jnj94_zkdheBYXOQ2KAEG9O4QzBPwS4xRtK5k_wU5N3-gYIGceIrpWzxa2gmk0oDXLhTDt9gaZv_mDGJB1JTqnpeKyr8y3rn8ZnbRUdJzk4H66znTWw",
+                                      //     savePath: file.path,
+                                      //     url: widget.message.fileUrl!).then((value)async
+                                      // {
+                                      //   // final status = await Permission.storage.request();
+                                      //   // if (status.isGranted) {
+                                      //   //   OpenFile.open(file.path,).then((value) {
+                                      //   //     print(value);
+                                      //   //   });
+                                      //   // }
+                                      // }).catchError((error){
+                                      //   print(error);
+                                      // });
+
+                                      if (await Permission.contacts.request().isGranted) {
+                                        // Either the permission was already granted before or the user just granted it.
+                                      }
+
+// You can request multiple permissions at once.
+                                      Map<Permission, PermissionStatus> statuses = await [
+                                        Permission.location,
+                                        Permission.storage,
+                                      ].request();
+                                      print(statuses[Permission.location]);
+                                      Directory path = await getApplicationDocumentsDirectory();
+                                   var x= await   FirebaseStorage.instance.
+                                   refFromURL("https://firebasestorage.googleapis.com/v0/b/notificationchat-d2d49.appspot.com/o/chat_files%2FSection%202-%20Exercises.pdf?alt=media&token=51185bbe-7274-4d0f-b6ec-7e593c32bc68").getData();
+                                   File file = File("${path.absolute}/my_pdf.pdf");
+                                     file.writeAsBytes(x!);
+                                     // OpenFile.open(file.path);
+                                    },
+                                    child: SvgPicture.asset(
+                                      'assets/svg/download.svg',
+                                      color: widget.isSender
+                                          ? Theme.of(context).primaryColor
+                                          : Theme.of(context)
+                                              .scaffoldBackgroundColor,
+                                    ),
                                   ),
                                 ],
                               ),
