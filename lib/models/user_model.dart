@@ -27,7 +27,7 @@ class UserModel {
     email = m[UserVars.email];
     name = m[UserVars.name] ?? m['firstName'];
     phone = m[UserVars.phone];
-    token = "token";
+    token =  m[UserVars.token];
     countryCode = m[UserVars.countryCode];
     imageUrl = m[UserVars.imageURL];
     imagePath = m[UserVars.imagePath];

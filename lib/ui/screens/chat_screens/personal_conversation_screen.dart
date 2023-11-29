@@ -23,9 +23,7 @@ import 'package:path/path.dart' as path;
 import 'package:quiver/strings.dart';
 
 class PersonalConversationScreen extends StatefulWidget {
-   PersonalConversationScreen({Key? key,required this.index}) : super(key: key);
-  final int index ;
-   String? token ;
+   PersonalConversationScreen({Key? key}) : super(key: key);
 
   @override
   State<PersonalConversationScreen> createState() =>
@@ -38,21 +36,6 @@ class _PersonalConversationScreenState
   final FirebaseAuth auth = FirebaseAuth.instance;
   String? get uid => auth.currentUser?.uid;
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    firestore.collection(UserVars.usersTable).get().then((value)
-    {
-      firestore.collection(UserVars.usersTable).doc(value.docs[widget.index+1].id).get().then((value)
-      {
-        widget.token = value.data()!["token"];
-
-      });
-
-    });
-
-
-  }
   final ScrollController _listScrollController = ScrollController();
   String? _uploadedFileURL;
   final TextEditingController _message = TextEditingController();
@@ -270,8 +253,6 @@ class _PersonalConversationScreenState
                 ),
                 IconButton(
                   onPressed: () {
-                    print("token----->${widget.token}");
-                    print("FileUrl----->${_uploadedFileURL}");
                     if (isBlank(_message.text)) return;
                     _sendData();
                     DioHelper.postData(url: "/fcm/send", data:
@@ -281,7 +262,7 @@ class _PersonalConversationScreenState
                         "body":_message.text,
                         "time":"FCM Message"
                       },
-                      "to":widget.token
+                      "to":otherUser.token
                     }).then((value)
                     {
                       _message.clear();

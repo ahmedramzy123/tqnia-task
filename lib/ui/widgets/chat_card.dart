@@ -58,7 +58,7 @@ class _ChatCardState extends State<ChatCard> {
             value: userChatProvider,
             child: ChangeNotifierProvider<ChatProvider>.value(
               value: context.read<ChatProvider>(),
-              child:  PersonalConversationScreen(index: 0,),
+              child:  PersonalConversationScreen(),
             ),
           ),
         ),

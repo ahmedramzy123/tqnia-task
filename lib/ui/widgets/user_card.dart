@@ -35,7 +35,9 @@ class _UserCardState extends State<UserCard> {
             child: ChangeNotifierProvider<ChatProvider>(
               create: (_) => ChatProvider(
                   context.read<ChatsProvider>().chat ?? ChatModel()),
-              child:  PersonalConversationScreen(index: widget.index,),
+              child:  PersonalConversationScreen(
+
+              ),
             ),
           ),
         ),

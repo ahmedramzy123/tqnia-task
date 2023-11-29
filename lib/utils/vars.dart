@@ -8,6 +8,8 @@ abstract class UserVars {
   static const String imageURL = 'image_url';
   static const String imagePath = 'image_path';
   static const String online = 'online';
+  static const String token = 'token';
+
 }
 
 abstract class ChatVars {
